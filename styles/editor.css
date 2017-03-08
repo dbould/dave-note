@@ -1,0 +1,10 @@
+.editor {
+  float: left;
+  width: 42%;
+}
+
+.editor textarea {
+  width: 49%;
+  height: 99%;
+  position: absolute;
+}
