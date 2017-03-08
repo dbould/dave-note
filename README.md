@@ -5,7 +5,7 @@ At the moment it converts text to markdown.
 
 ## Installation
 ```
-npm build
+npm install
 ```
 
 ```
