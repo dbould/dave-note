@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Markdown from 'react-remarkable';
-import styles from '../styles/preview.css';
+import '../styles/preview.css';
 
 class Preview extends Component {
   constructor(props) {

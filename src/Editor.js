@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Preview from './Preview.js';
-import styles from '../styles/editor.css';
+import '../styles/editor.css';
 
 class Editor extends Component {
   constructor(props) {
@@ -22,9 +22,7 @@ class Editor extends Component {
           <textarea onChange={this.handleChange}>
           </textarea>
         </div>
-        <div>
-          <Preview noteText={this.state.noteText} />
-        </div>
+        <Preview noteText={this.state.noteText} />
       </div>
     );
   }
