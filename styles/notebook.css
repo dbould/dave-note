@@ -1,0 +1,11 @@
+.notebook {
+  height: 80.5vh;
+  width: 20vh;
+  float: left;
+  border: 1px solid black;
+  margin-right: 0.5%;
+}
+
+.noteSelect {
+  margin: 5px;
+}
