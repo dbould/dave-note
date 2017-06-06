@@ -12,7 +12,7 @@ class Editor extends Component {
 
   handleChange(event) {
     var noteText = event.target.value;
-    this.setState({noteText: noteText});
+    this.props.handleTextChange(noteText);
   }
 
   componentWillReceiveProps(props) {
@@ -26,11 +26,11 @@ class Editor extends Component {
     return (
       <div>
         <div className={"editor"}>
-          <textarea onChange={this.handleChange} value={this.state.noteText}>
+          <textarea onChange={this.handleChange} value={this.props.noteText}>
 
           </textarea>
         </div>
-        <Preview noteText={this.state.noteText} />
+        <Preview noteText={this.props.noteText} />
       </div>
     );
   }

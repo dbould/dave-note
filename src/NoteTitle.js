@@ -11,7 +11,7 @@ class NoteTitle extends Component {
 
   handleChange(event) {
     var noteTitle = event.target.value;
-    this.setState({noteTitle: noteTitle});
+    this.props.handleTitleChange(noteTitle);
   }
 
   componentWillReceiveProps(props) {
@@ -25,7 +25,7 @@ class NoteTitle extends Component {
 
     return (
       <div id="note-title">
-        <input id="note-title-input" type="text" value={this.state.noteTitle} ></input>
+        <input id="note-title-input" type="text" value={this.props.noteTitle} onChange={this.handleChange}></input>
       </div>
     );
   }

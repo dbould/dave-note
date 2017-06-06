@@ -6,7 +6,9 @@ import Editor from './Editor.js';
 class Notebook extends Component {
   constructor(props) {
       super(props);
-      this.state = {notes: [], selectedNoteTitle: '', selectedNoteText: ''};
+      this.handleTitleChange = this.handleTitleChange.bind(this);
+      this.handleTextChange = this.handleTextChange.bind(this);
+      this.state = {notes: [], selectedNoteId: 0, selectedNoteTitle: '', selectedNoteText: ''};
   }
 
   componentDidMount() {
@@ -28,10 +30,41 @@ class Notebook extends Component {
       .then(response => response.json())
       .then(json => {
         this.setState({
+          selectedNoteId: json.id,
           selectedNoteTitle: json.title,
           selectedNoteText: json.note
         });
       });
+  }
+
+  handleTitleChange(noteTitle) {
+    this.setState({selectedNoteTitle: noteTitle});
+  }
+
+  handleTextChange(noteText) {
+    this.setState({selectedNoteText: noteText});
+  }
+
+  createNote() {
+    this.setState({noteId: 0, selectedNoteTitle: '', selectedNoteText: ''});
+
+    fetch('http://dave-note-api.dev/api/note/create/', {
+      method: 'post',
+      body: JSON.stringify({
+        title: this.state.selectedNoteTitle,
+        note: this.state.selectedNoteText
+      })
+    });
+  }
+
+  updateNote() {
+    fetch('http://dave-note-api.dev/api/note/update/' + this.state.selectedNoteId, {
+      method: 'post',
+      body: JSON.stringify({
+        title: this.state.selectedNoteTitle,
+        note: this.state.selectedNoteText
+      })
+    });
   }
 
   render() {
@@ -44,12 +77,26 @@ class Notebook extends Component {
     });
 
     return (
+      <div>
+        <div id="header">
+          <div id="title">
+            <h1>Dave Note</h1>
+          </div>
+          <div id="toolbar">
+            <div>
+              <div><a href="#" onClick={()=>this.createNote()}>Create New</a></div>
+              <div><a href="#" onClick={()=>this.updateNote()}>Update</a></div>
+              <div><a href="#">Delete</a></div>
+            </div>
+          </div>
+        </div>
       <div id="main-container">
         <div className={"notebook"}>
           <div>{ notes }</div>
         </div>
-        <NoteTitle noteTitle={this.state.selectedNoteTitle} />
-        <Editor noteText={this.state.selectedNoteText} />
+        <NoteTitle noteTitle={this.state.selectedNoteTitle} handleTitleChange={this.handleTitleChange} />
+        <Editor noteText={this.state.selectedNoteText} handleTextChange={this.handleTextChange} />
+      </div>
       </div>
     );
   }
