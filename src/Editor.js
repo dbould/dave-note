@@ -26,8 +26,9 @@ class Editor extends Component {
     return (
       <div>
         <div className={"editor"}>
-          <textarea onChange={this.handleChange} value={this.props.noteText}>
-
+          <textarea
+            onChange={this.handleChange}
+            value={this.props.noteText}>
           </textarea>
         </div>
         <Preview noteText={this.props.noteText} />

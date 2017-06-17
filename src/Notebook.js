@@ -8,11 +8,29 @@ class Notebook extends Component {
       super(props);
       this.handleTitleChange = this.handleTitleChange.bind(this);
       this.handleTextChange = this.handleTextChange.bind(this);
-      this.state = {notes: [], selectedNoteId: 0, selectedNoteTitle: '', selectedNoteText: ''};
+      this.state = {
+        notes: [],
+        selectedNoteId: 0,
+        selectedNoteTitle: '',
+        selectedNoteText: '',
+        notebook: "notebook-hidden"
+      };
+  }
+
+  handleResize() {
+    this.setState({windowWidth: window.innerWidth});
   }
 
   componentDidMount() {
     this.getNotes();
+  }
+
+  handleNavClick() {
+    if(this.state.notebook === 'notebook-hidden') {
+      this.setState({notebook: 'notebook-visible'});
+    } else {
+      this.setState({notebook: 'notebook-hidden'});
+    }
   }
 
   getNotes() {
@@ -79,24 +97,39 @@ class Notebook extends Component {
     return (
       <div>
         <div id="header">
-          <div id="title">
-            <h1>Dave Note</h1>
+
+          <div id="notebook-nav">
+            <img src={require("../images/notebook.png")}
+                 alt="Notebook Menu"
+                 onClick={()=>this.handleNavClick()} />
           </div>
+
+          <div id="title">
+            <h1>DaveNote</h1>
+          </div>
+
           <div id="toolbar">
             <div>
-              <div><a href="#" onClick={()=>this.createNote()}>Create New</a></div>
-              <div><a href="#" onClick={()=>this.updateNote()}>Update</a></div>
-              <div><a href="#">Delete</a></div>
+              <div className="toolbar-button">
+                <a href="#" onClick={()=>this.createNote()}>Create New</a>
+              </div>
+              <div className="toolbar-button">
+                <a href="#" onClick={()=>this.updateNote()}>Update</a>
+              </div>
+              <div className="toolbar-button">
+                <a href="#">Delete</a>
+              </div>
             </div>
           </div>
         </div>
-      <div id="main-container">
-        <div className={"notebook"}>
-          <div>{ notes }</div>
+
+        <div id="main-container">
+          <div className={(this.state.notebook)}>
+            <div>{ notes }</div>
+          </div>
+          <NoteTitle noteTitle={this.state.selectedNoteTitle} handleTitleChange={this.handleTitleChange} />
+          <Editor noteText={this.state.selectedNoteText} handleTextChange={this.handleTextChange} />
         </div>
-        <NoteTitle noteTitle={this.state.selectedNoteTitle} handleTitleChange={this.handleTitleChange} />
-        <Editor noteText={this.state.selectedNoteText} handleTextChange={this.handleTextChange} />
-      </div>
       </div>
     );
   }

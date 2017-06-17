@@ -22,10 +22,13 @@ class NoteTitle extends Component {
   }
 
   render() {
-
     return (
       <div id="note-title">
-        <input id="note-title-input" type="text" value={this.props.noteTitle} onChange={this.handleChange}></input>
+        <input id="note-title-input"
+         type="text"
+         value={this.props.noteTitle}
+         onChange={this.handleChange}>
+       </input>
       </div>
     );
   }

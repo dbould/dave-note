@@ -1,9 +1,37 @@
-.notebook {
+.notebook-visible a {
+  color: #d9d9d9;
+  text-decoration: none;
+}
+
+#notebook-nav {
+  float: left;
+  width: 50px;
+  padding: 15px 10px 10px 10px;
+}
+
+.notebook-hidden {
+  display: none;
+}
+
+.notebook-visible {
+  display: block;
   height: 80.5vh;
   width: 20vh;
   float: left;
   border: 1px solid black;
   margin-right: 0.5%;
+  background-color: #4d4d4d;
+}
+
+.toolbar-button {
+  float: left;
+  width: 150px;
+  border: 1px solid black;
+  margin-top: 4.5%;
+  text-align: center;
+  vertical-align: center;
+  padding-top: 2%;
+  padding-bottom: 2%;
 }
 
 .noteSelect {

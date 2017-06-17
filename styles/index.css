@@ -13,7 +13,14 @@ body {
 #header {
   border: 1px solid black;
   float: left;
-  width: 100%
+  width: 100%;
+  background-color: #4d4d4d;
+  color: #d9d9d9;
+}
+
+#header a {
+  color: #d9d9d9;
+  text-decoration: none;
 }
 
 #title {
