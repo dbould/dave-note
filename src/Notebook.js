@@ -71,8 +71,12 @@ class Notebook extends Component {
       body: JSON.stringify({
         title: this.state.selectedNoteTitle,
         note: this.state.selectedNoteText
-      })
-    });
+      })}).then(response => response.json())
+          .then(json => {
+          this.setState({
+            selectedNoteId: json
+          });
+      });
   }
 
   updateNote() {
