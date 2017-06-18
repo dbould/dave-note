@@ -89,6 +89,20 @@ class Notebook extends Component {
     });
   }
 
+  deleteNote() {
+    fetch('http://dave-note-api.dev/api/note/delete/' + this.state.selectedNoteId, {
+      method: 'post',
+      body: JSON.stringify({
+      })
+    });
+
+    this.setState({
+      selectedNoteId: 0,
+      selectedNoteTitle: '',
+      selectedNoteText: ''
+    });
+  }
+
   render() {
     var notes = this.state.notes.map((note, key) => {
       return (<div className="noteSelect" key={key}>
@@ -121,7 +135,10 @@ class Notebook extends Component {
                 <a href="#" onClick={()=>this.updateNote()}>Update</a>
               </div>
               <div className="toolbar-button">
-                <a href="#">Delete</a>
+                <a href="#" onClick={()=>this.deleteNote()}>Delete</a>
+              </div>
+              <div className="toolbar-button">
+                <a href="#">Logout</a>
               </div>
             </div>
           </div>
