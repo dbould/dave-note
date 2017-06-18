@@ -112,6 +112,10 @@ class Notebook extends Component {
               </div>);
     });
 
+    if (this.state.selectedNoteId === 0) {
+      this.getNote(this.state.selectedNoteId);
+    }
+
     return (
       <div>
         <div id="header">
