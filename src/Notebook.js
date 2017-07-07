@@ -2,12 +2,16 @@ import React, { Component } from 'react';
 import '../styles/notebook.css';
 import NoteTitle from './NoteTitle.js';
 import Editor from './Editor.js';
+import Toolbar from './Toolbar';
 
 class Notebook extends Component {
   constructor(props) {
       super(props);
       this.handleTitleChange = this.handleTitleChange.bind(this);
       this.handleTextChange = this.handleTextChange.bind(this);
+      this.createNote = this.createNote.bind(this);
+      this.updateNote = this.updateNote.bind(this);
+      this.deleteNote = this.deleteNote.bind(this);
       this.state = {
         notes: [],
         selectedNoteId: 0,
@@ -64,19 +68,21 @@ class Notebook extends Component {
   }
 
   createNote() {
-    this.setState({noteId: 0, selectedNoteTitle: '', selectedNoteText: ''});
-
-    fetch('http://dave-note-api.dev/api/note/create/', {
-      method: 'post',
-      body: JSON.stringify({
-        title: this.state.selectedNoteTitle,
-        note: this.state.selectedNoteText
-      })}).then(response => response.json())
-          .then(json => {
-          this.setState({
-            selectedNoteId: json
-          });
-      });
+    this.setState({noteId: 0,
+                   selectedNoteTitle: '',
+                   selectedNoteText: ''}, function() {
+                     fetch('http://dave-note-api.dev/api/note/create/', {
+                       method: 'post',
+                       body: JSON.stringify({
+                         title: this.state.selectedNoteTitle,
+                         note: this.state.selectedNoteText
+                       })}).then(response => response.json())
+                           .then(json => {
+                           this.setState({
+                             selectedNoteId: json
+                           });
+                       });
+                   });
   }
 
   updateNote() {
@@ -130,22 +136,9 @@ class Notebook extends Component {
             <h1>DaveNote</h1>
           </div>
 
-          <div id="toolbar">
-            <div>
-              <div className="toolbar-button">
-                <a href="#" onClick={()=>this.createNote()}>Create New</a>
-              </div>
-              <div className="toolbar-button">
-                <a href="#" onClick={()=>this.updateNote()}>Update</a>
-              </div>
-              <div className="toolbar-button">
-                <a href="#" onClick={()=>this.deleteNote()}>Delete</a>
-              </div>
-              <div className="toolbar-button">
-                <a href="#">Logout</a>
-              </div>
-            </div>
-          </div>
+          <Toolbar createNote={this.createNote}
+                   updateNote={this.updateNote}
+                   deleteNote={this.deleteNote} />
         </div>
 
         <div id="main-container">
