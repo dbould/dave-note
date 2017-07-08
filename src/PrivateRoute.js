@@ -4,11 +4,11 @@ import {
   Redirect,
   withRouter
 } from 'react-router-dom';
-import fakeAuth from './FakeAuth.js';
+import Auth from './Auth.js';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={props => (
-    fakeAuth.isAuthenticated ? (
+    Auth.isAuthenticated ? (
       <Component {...props}/>
     ) : (
       <Redirect to={{

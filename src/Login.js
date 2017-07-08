@@ -6,21 +6,37 @@ import {
   Redirect,
   withRouter
 } from 'react-router-dom'
-import fakeAuth from './FakeAuth.js';
+import Auth from './Auth.js';
 
 class Login extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      email: '',
+      password: '',
+      redirectToReferrer: false
+    };
+
+    this.login = this.login.bind(this);
+    this.handleEmailChange = this.handleEmailChange.bind(this);
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
   }
 
-  state = {
-    redirectToReferrer: false
-  }
-
-  login = () => {
-    fakeAuth.authenticate(() => {
+  login() {
+    Auth.authenticate(() => {
       this.setState({ redirectToReferrer: true })
-    })
+    }, this.state.email, this.state.password)
+  }
+
+  handleEmailChange(event) {
+    var email = event.target.value;
+    this.setState({email: email});
+  }
+
+  handlePasswordChange(event) {
+    var password = event.target.value;
+    this.setState({password: password});
   }
 
   render() {
@@ -35,20 +51,22 @@ class Login extends Component {
 
     return (
       <div>
-        <h2 className="card-heading">Login</h2>
+        <h2 className = "card-heading">Login</h2>
 
-        <div className="field-line">
+        <div className = "field-line">
+          Email:
           <input
-            name="email"
-            defaultValue='email'
+            name = "email"
+            onChange = {this.handleEmailChange}
           />
         </div>
 
-        <div className="field-line">
+        <div className = "field-line">
+          Password:
           <input
-            type="password"
-            name="password"
-            defaultValue=''
+            type = "password"
+            name = "password"
+            onChange = {this.handlePasswordChange}
           />
         </div>
 

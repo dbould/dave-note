@@ -4,7 +4,7 @@ import {
   Redirect,
   withRouter
 } from 'react-router-dom';
-import fakeAuth from './FakeAuth.js';
+import Auth from './Auth.js';
 
 class Toolbar extends Component {
   constructor(props) {
@@ -41,7 +41,7 @@ class Toolbar extends Component {
           </div>
           <div className="toolbar-button">
             <a href="#" onClick={() => {
-              fakeAuth.signout()
+              Auth.signout()
             }}>Logout</a>
           </div>
         </div>
