@@ -41,7 +41,7 @@ class Toolbar extends Component {
           </div>
           <div className="toolbar-button">
             <a href="#" onClick={() => {
-              fakeAuth.signout(() => history.push('/'))
+              fakeAuth.signout()
             }}>Logout</a>
           </div>
         </div>

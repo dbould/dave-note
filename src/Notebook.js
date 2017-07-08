@@ -138,7 +138,8 @@ class Notebook extends Component {
 
           <Toolbar createNote={this.createNote}
                    updateNote={this.updateNote}
-                   deleteNote={this.deleteNote} />
+                   deleteNote={this.deleteNote}
+                   history={this.history} />
         </div>
 
         <div id="main-container">

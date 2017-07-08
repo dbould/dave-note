@@ -39,18 +39,16 @@ class Login extends Component {
 
         <div className="field-line">
           <input
-            floatingLabelText="Email"
             name="email"
-            value='email'
+            defaultValue='email'
           />
         </div>
 
         <div className="field-line">
           <input
-            floatingLabelText="Password"
             type="password"
             name="password"
-            value='password'
+            defaultValue=''
           />
         </div>
 
