@@ -13,10 +13,9 @@ import PrivateRoute from './PrivateRoute.js';
 const Routes = () => (
   <Router>
     <div>
-      <ul>
-        <li><Link to="/public">Public Page</Link></li>
-        <li><Link to="/notebook">Protected Page</Link></li>
-      </ul>
+      <Redirect to={{
+        pathname: '/notebook'
+      }}/>
       <Route path="/login" component={Login}/>
       <PrivateRoute path="/notebook" component={Notebook}/>
     </div>

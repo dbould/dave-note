@@ -8,7 +8,7 @@ import {
   Redirect,
   withRouter
 } from 'react-router-dom'
-import Routes from './routes.js';
+import Routes from './Routes.js';
 import PrivateRoute from './PrivateRoute.js';
 import fakeAuth from './FakeAuth.js';
 
