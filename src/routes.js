@@ -17,7 +17,7 @@ const Routes = () => (
         pathname: '/notebook'
       }}/>
       <Route path="/login" component={Login}/>
-      <PrivateRoute path="/notebook" component={Notebook}/>
+      <Route path="/notebook" component={Notebook}/>
     </div>
   </Router>
 );
