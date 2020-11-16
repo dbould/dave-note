@@ -12,6 +12,7 @@ class Notebook extends Component {
       this.createNote = this.createNote.bind(this);
       this.updateNote = this.updateNote.bind(this);
       this.deleteNote = this.deleteNote.bind(this);
+      this.baseUrl = 'http://dave-note.test/api/';
       this.state = {
         notes: [],
         selectedNoteId: 0,
@@ -38,7 +39,7 @@ class Notebook extends Component {
   }
 
   getNotes() {
-    fetch('http://dave-note-api.dev/api/notes')
+    fetch(this.baseUrl + 'notes')
       .then(response => response.json())
       .then(json => {
         this.setState({
@@ -48,7 +49,7 @@ class Notebook extends Component {
   }
 
   getNote(id) {
-    fetch('http://dave-note-api.dev/api/note/' + id)
+    fetch(this.baseUrl + 'note/' + id)
       .then(response => response.json())
       .then(json => {
         this.setState({
@@ -71,7 +72,7 @@ class Notebook extends Component {
     this.setState({noteId: 0,
                    selectedNoteTitle: '',
                    selectedNoteText: ''}, function() {
-                     fetch('http://dave-note-api.dev/api/note/create/', {
+                     fetch(this.baseUrl + 'note/create/', {
                        method: 'post',
                        body: JSON.stringify({
                          title: this.state.selectedNoteTitle,
@@ -86,7 +87,7 @@ class Notebook extends Component {
   }
 
   updateNote() {
-    fetch('http://dave-note-api.dev/api/note/update/' + this.state.selectedNoteId, {
+    fetch(this.baseUrl + 'note/update/' + this.state.selectedNoteId, {
       method: 'post',
       body: JSON.stringify({
         title: this.state.selectedNoteTitle,
@@ -96,7 +97,7 @@ class Notebook extends Component {
   }
 
   deleteNote() {
-    fetch('http://dave-note-api.dev/api/note/delete/' + this.state.selectedNoteId, {
+    fetch(this.baseUrl + 'note/delete/' + this.state.selectedNoteId, {
       method: 'post',
       body: JSON.stringify({
       })
